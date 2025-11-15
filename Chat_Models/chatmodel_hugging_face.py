@@ -1,18 +1,18 @@
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint # huggingface endpoint used when we want to use huggingface API.
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
 llm = HuggingFaceEndpoint(
-    repo_id= "meta-llama/Llama-3.1-8B-Instruct",
-    task = "text-generation",
-    model_kwargs=(
-        temperature = 0.1,
-        max_new_tokens=100
-    )
-)
-model  = ChatHuggingFace(llm = llm)
+    repo_id="meta-llama/Llama-3.1-8B-Instruct",
+    task="text-generation",
+    huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
+    max_new_tokens=512,
+    temperature=0.7,
+) # type: ignore
 
-response  = model.invoke("what is the capital of bihar?")
+model = ChatHuggingFace(llm=llm)
+
+response = model.invoke("do you know about ram")
 print(response.content)
-
