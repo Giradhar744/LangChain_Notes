@@ -55,7 +55,7 @@ result = structured_model.invoke('''The ASUS Vivobook S14 is a sleek and portabl
 ''')
 
 print(result)
-print(result.keys())
+print(result.keys())  #type: ignore
 # print(result['summary']) #type:ignore
 # print(result['sentiment'])#type:ignore
 
